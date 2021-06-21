@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "428750823112",
+    "project_id": "mlao-be238",
+    "storage_bucket": "mlao-be238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428750823112:android:d0ef2e1ba149a23a6fcffd",
+        "android_client_info": {
+          "package_name": "com.flutterlao.mlao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428750823112-kebg9ljofodl151n04oub2qv5o33025n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeg8RKd6XzupgJ1YUKeqc-RvFmvuBNvPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428750823112-kebg9ljofodl151n04oub2qv5o33025n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
