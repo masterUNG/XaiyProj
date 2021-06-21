@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class _EditGoupFoodMenuState extends State<EditGoupFoodMenu> {
         title: Text('ທ່ານຕ້ອງການຈະປ່ນແປງຂໍ້ມູນໝວດສິນຄ້ານີ້ແທ້ບໍ ?'),
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               ElevatedButton.icon(
                 onPressed: () {
@@ -97,16 +99,27 @@ class _EditGoupFoodMenuState extends State<EditGoupFoodMenu> {
   }
 
   Future<Null> editValueOnMySQL() async {
-    String id = groupFoodModel.id;
-    String url =
-        '${MyConstant().domain}/mlao/editGroupFoodWhereId.php?isAdd=true&id=$id&NameGroup=$name&GoupImage=$pathImage';
-    await Dio().get(url).then((value) {
-      if (value.toString() == 'true') {
-        Navigator.pop(context);
-      } else {
-        normalDialog(context, 'ກະລຸນາລອງໄໝ່ ຂໍ້ມູນ ? ຜິດພາດ');
-      }
-    });
+    int i = Random().nextInt(100000);
+    String nameImage = 'group$i.jpg';
+
+    try {
+      Map<String, dynamic> map = Map();
+      map['file'] =
+          await MultipartFile.fromFile(file.path, filename: nameImage);
+      FormData formData = FormData.fromMap(map);
+      
+    } catch (e) {}
+
+    // String id = groupFoodModel.id;
+    // String url =
+    //     '${MyConstant().domain}/mlao/editGroupFoodWhereId.php?isAdd=true&id=$id&NameGroup=$name&GoupImage=$pathImage';
+    // await Dio().get(url).then((value) {
+    //   if (value.toString() == 'true') {
+    //     Navigator.pop(context);
+    //   } else {
+    //     normalDialog(context, 'ກະລຸນາລອງໄໝ່ ຂໍ້ມູນ ? ຜິດພາດ');
+    //   }
+    // });
   }
 
   Widget groupFoodImage() => Row(
