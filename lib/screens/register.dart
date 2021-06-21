@@ -118,6 +118,8 @@ class _RegisterState extends State<Register> {
     String url =
         '${MyConstant().domain}/mlao/addUserCust.php?isAdd=true&Name=$name&User=$user&Password=$password&Address=$address&Phone=$phone&ChooseType=User';
 
+    print('###### url register ==>> $url');
+
     try {
       Response response = await Dio().get(url);
       print('res = $response');

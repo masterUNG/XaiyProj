@@ -54,7 +54,7 @@ class _HomeGroupState extends State<HomeGroup> {
   Widget createMenu(GroupFoodModel groupFoodModel, int index) {
     return GestureDetector(
       onTap: () {
-        print('You Click index $index');
+        print(' ##### test You Click index $index');
         MaterialPageRoute route = MaterialPageRoute(
           builder: (context) => Showfood(
             groupFoodModel: groupFoodModels[index],

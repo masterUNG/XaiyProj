@@ -2,12 +2,17 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:mlao/model/cart_model.dart';
 import 'package:mlao/model/food_model.dart';
 import 'package:mlao/model/groupfood_model.dart';
 import 'package:mlao/model/user_model.dart';
+import 'package:mlao/utility/my_api.dart';
 import 'package:mlao/utility/my_constant.dart';
 import 'package:mlao/utility/my_style.dart';
+import 'package:mlao/utility/normal_dialog.dart';
+import 'package:mlao/utility/sqlite_helper.dart';
 
 class FoodMenu extends StatefulWidget {
   final UserModel userModel;
@@ -236,7 +241,7 @@ class _FoodMenuState extends State<FoodMenu> {
   }
 
   Future<Null> addOrderToCart(int index) async {
-    // String nameShop = userModel.nameShop;
+    String nameShop = userModel.nameShop;
     String idFood = foodModels[index].id;
     String nameFood = foodModels[index].nameFood;
     String price = foodModels[index].price;
@@ -244,57 +249,57 @@ class _FoodMenuState extends State<FoodMenu> {
     int priceInt = int.parse(price);
     int sumInt = priceInt * amount;
 
-    // lat2 = double.parse(userModel.lat);
-    // lng2 = double.parse(userModel.lng);
-    // double distance = MyAPI().calculateDistance(lat1, lng1, lat2, lng2);
+    lat2 = double.parse(userModel.lat);
+    lng2 = double.parse(userModel.lng);
+    double distance = MyAPI().calculateDistance(lat1, lng1, lat2, lng2);
 
-    // var myFormat = NumberFormat('###.0#', 'en_US');
-    // String distanceString = myFormat.format(distance);
+    var myFormat = NumberFormat('###.0#', 'en_US');
+    String distanceString = myFormat.format(distance);
 
-    // int transport = MyAPI().calculateTransport(distance);
-    print(
-        'idShop = $idShop,  idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt');
-
+    int transport = MyAPI().calculateTransport(distance);
     // print(
-    //     'idShop = $idShop, nameShop = $nameShop, idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt, distance = $distanceString, transport = $transport');
+    //     ' #### idShop = $idShop,  idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt');
 
-    //   Map<String, dynamic> map = Map();
+    print(
+        '####===>>>  idShop = $idShop, nameShop = $nameShop, idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt, distance = $distanceString, transport = $transport');
 
-    //   map['idShop'] = idShop;
-    //   map['nameShop'] = nameShop;
-    //   map['idFood'] = idFood;
-    //   map['nameFood'] = nameFood;
-    //   map['price'] = price;
-    //   map['amount'] = amount.toString();
-    //   map['sum'] = sumInt.toString();
-    //   map['distance'] = distanceString;
-    //   map['transport'] = transport.toString();
+      Map<String, dynamic> map = Map();
 
-    //   print('map ==> ${map.toString()}');
+      map['idShop'] = idShop;
+      map['nameShop'] = nameShop;
+      map['idFood'] = idFood;
+      map['nameFood'] = nameFood;
+      map['price'] = price;
+      map['amount'] = amount.toString();
+      map['sum'] = sumInt.toString();
+      map['distance'] = distanceString;
+      map['transport'] = transport.toString();
 
-    //   CartModel cartModel = CartModel.fromJson(map);
+      print('map ==> ${map.toString()}');
 
-    //   var object = await SQLiteHelper().readAllDataFromSQLite();
-    //   print('object lenght = ${object.length}');
+      CartModel cartModel = CartModel.fromJson(map);
 
-    //   if (object.length == 0) {
-    //     await SQLiteHelper().insertDataToSQLite(cartModel).then((value) {
-    //       print('Insert Success');
-    //       showToast('Insert Success');
-    //     });
-    //   } else {
-    //     String idShopSQLite = object[0].idShop;
-    //     print('idShopSQLite ==> $idShopSQLite');
-    //     if (idShop == idShopSQLite) {
-    //       await SQLiteHelper().insertDataToSQLite(cartModel).then((value) {
-    //         print('Insert Success');
-    //         showToast('Insert Success');
-    //       });
-    //     } else {
-    //       normalDialog(context,
-    //           'ກະຕ່າ ມີລາຍການສິນຄ້າຂອງຮ້ານນີ້ ${object[0].nameShop}ກະລຸນາຊື້ຈາກຮ້ານນີ້ໃຫ້ ສຳເລັດກ່ອນ');
-    //     }
-    //   }
+      var object = await SQLiteHelper().readAllDataFromSQLite();
+      print('object lenght = ${object.length}');
+
+      if (object.length == 0) {
+        await SQLiteHelper().insertDataToSQLite(cartModel).then((value) {
+          print('Insert Success');
+          // showToast('Insert Success');
+        });
+      } else {
+        String idShopSQLite = object[0].idShop;
+        print('idShopSQLite ==> $idShopSQLite');
+        if (idShop == idShopSQLite) {
+          await SQLiteHelper().insertDataToSQLite(cartModel).then((value) {
+            print('Insert Success');
+            // showToast('Insert Success');
+          });
+        } else {
+          normalDialog(context,
+              'ກະຕ່າ ມີລາຍການສິນຄ້າຂອງຮ້ານນີ້ ${object[0].nameShop}ກະລຸນາຊື້ຈາກຮ້ານນີ້ໃຫ້ ສຳເລັດກ່ອນ');
+        }
+      }
   }
 
   // void showToast(String string) {

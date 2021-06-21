@@ -56,7 +56,10 @@ class _BodysState extends State<Bodys> {
   Widget createCard(UserModel userModel, int index) {
     return GestureDetector(
       onTap: () {
-        print('You Click index $index');
+        print('#master Test ### You Click index $index');
+
+        print('### nameShop = ${userModels[index].nameShop}');
+
         MaterialPageRoute route = MaterialPageRoute(
           builder: (context) => ShowShopFoodMenu(
             userModel: userModels[index],
@@ -93,7 +96,7 @@ class _BodysState extends State<Bodys> {
           MyStyle().showImages(),
           ListTile(
             leading: Icon(Icons.fastfood),
-            title: Text('ເລຶອກຮ້ານຄ້າທີໃກ້ບ້ານທ່ານ'),
+            title: Text(' ເລຶອກຮ້ານຄ້າທີໃກ້ບ້ານທ່ານ'),
             // onTap: () {
             //   currentWidget = ShowListShopAll();
             // },

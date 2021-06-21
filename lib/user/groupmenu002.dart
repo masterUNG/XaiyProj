@@ -31,6 +31,9 @@ class _HomeMenuState extends State<HomeMenu> {
     // TODO: implement initState
     super.initState();
     userModel = widget.userModel;
+
+    print('### At groupmenu002 ===>> ${userModel.nameShop}');
+
     readFoodMenu();
     findLocation();
   }
@@ -79,10 +82,11 @@ class _HomeMenuState extends State<HomeMenu> {
                   ],
                 ),
                 onTap: () {
-                  print('You Click index $index');
+                  print('#### You Click index $index');
                   MaterialPageRoute route = MaterialPageRoute(
                     builder: (context) => Showfood(
                       groupFoodModel: groupFoodModels[index],
+                      userModel: userModel,
                     ),
                   );
                   Navigator.push(context, route);

@@ -84,7 +84,7 @@ class _ShowMenuFoodState extends State<ShowMenuFood> {
                   ],
                 ),
                 onTap: () {
-                  // print('You Click index = $index');
+                  print(' ####### You Click index = $index');
                   amount = 1;
                   confirmOrder(index);
                 },
@@ -212,7 +212,7 @@ class _ShowMenuFoodState extends State<ShowMenuFood> {
                         addOrderToCart(index);
                       },
                       child: Text(
-                        'Order',
+                        'Order123',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -240,6 +240,7 @@ class _ShowMenuFoodState extends State<ShowMenuFood> {
   }
 
   Future<Null> addOrderToCart(int index) async {
+    print('#### addOrderToCart Work###');
     String nameShop = userModel.nameShop;
     String idFood = foodModels[index].id;
     String nameFood = foodModels[index].nameFood;
@@ -258,19 +259,19 @@ class _ShowMenuFoodState extends State<ShowMenuFood> {
     int transport = MyAPI().calculateTransport(distance);
 
     print(
-        'idShop = $idShop, nameShop = $nameShop, idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt, distance = $distanceString, transport = $transport');
+        'masterTest idShop = $idShop, nameShop = $nameShop, idFood = $idFood, nameFood = $nameFood, price = $price, amount = $amount, sum = $sumInt, distance = $distanceString, transport = $transport');
 
     Map<String, dynamic> map = Map();
 
     map['idShop'] = idShop;
-    map['nameShop'] = nameShop;
-    map['idFood'] = idFood;
-    map['nameFood'] = nameFood;
-    map['price'] = price;
-    map['amount'] = amount.toString();
-    map['sum'] = sumInt.toString();
-    map['distance'] = distanceString;
-    map['transport'] = transport.toString();
+    // map['nameShop'] = nameShop;
+    // map['idFood'] = idFood;
+    // map['nameFood'] = nameFood;
+    // map['price'] = price;
+    // map['amount'] = amount.toString();
+    // map['sum'] = sumInt.toString();
+    // map['distance'] = distanceString;
+    // map['transport'] = transport.toString();
 
     print('map ==> ${map.toString()}');
 

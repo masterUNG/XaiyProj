@@ -5,7 +5,7 @@ class MyStyle {
   Color darkColor = Colors.green;
   Color primaryColor = Colors.green;
 
-  Widget iconShowCart(BuildContext context) {
+  Widget iconShowCart(BuildContext context, int amount) {
     return Container(
       child: Row(children: <Widget>[
         IconButton(
@@ -26,14 +26,14 @@ class MyStyle {
                 Navigator.push(context, route);
               },
             ),
-            shownumber()
+            shownumber(amount)
           ],
         )
       ]),
     );
   }
 
-  Widget shownumber() {
+  Widget shownumber(int amount) {
     return Positioned(
       child: Container(
         width: 18,
@@ -46,7 +46,7 @@ class MyStyle {
             ),
             border: Border.all(color: Colors.white, width: 1.5)),
         child: Text(
-          "20",
+          '$amount',
           style: TextStyle(
             color: Colors.white,
             fontSize: 8,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mlao/model/groupfood_model.dart';
 import 'package:mlao/model/user_model.dart';
 import 'package:mlao/utility/my_style.dart';
+import 'package:mlao/utility/sqlite_helper.dart';
 // import 'about_shop.dart';
 import 'foodmenu13.dart';
 
@@ -26,12 +27,17 @@ class _ShowfoodState extends State<Showfood> {
   @override
   void initState() {
     super.initState();
-    // userModel = widget.userModel;
+    userModel = widget.userModel;
+    print('#### Name login = ${userModel.toJson()}');
     groupFoodModel = widget.groupFoodModel;
-    listWidgets.add(FoodMenu(
-      groupFoodModel: groupFoodModel,
-      userModel: userModel,
-    ));
+    print('##### groupFoodModel nameGroup ===>> ${groupFoodModel.toJson()}');
+
+    checkAmunt();
+
+    // listWidgets.add(FoodMenu(
+    //   groupFoodModel: groupFoodModel,
+    //   userModel: userModel,
+    // ));
     // listWidgets.add(HomeMenu(
     //   groupFoodModel: groupFoodModel,
     // ));
@@ -57,11 +63,22 @@ class _ShowfoodState extends State<Showfood> {
     );
   }
 
+  int amount = 0;
+
+  Future<Null> checkAmunt() async {
+    await SQLiteHelper().readAllDataFromSQLite().then((value) {
+      int i = value.length;
+      setState(() {
+        amount = i;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[MyStyle().iconShowCart(context)],
+        actions: <Widget>[MyStyle().iconShowCart(context, amount)],
         title: Row(
           children: [
             Text(groupFoodModel.nameGroup),
@@ -69,10 +86,10 @@ class _ShowfoodState extends State<Showfood> {
           ],
         ),
       ),
-      body: listWidgets.length == 0
-          ? MyStyle().showProgress()
-          : listWidgets[indexPage],
-      bottomNavigationBar: showBottonNavigationBar(),
+      body: FoodMenu(
+        groupFoodModel: groupFoodModel,
+        userModel: userModel,
+      ),
     );
   }
 

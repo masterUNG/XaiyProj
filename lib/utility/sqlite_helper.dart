@@ -41,6 +41,7 @@ class SQLiteHelper {
         cartModel.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+      print('### insert value on SQLite Success');
     } catch (e) {
       print('e insertData ==>> ${e.toString()}');
     }

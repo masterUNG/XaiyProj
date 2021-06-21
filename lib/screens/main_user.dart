@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mlao/providers/amount_cart_provider.dart';
 import 'package:mlao/user/body.dart';
+import 'package:mlao/utility/sqlite_helper.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mlao/shop/show_cart.dart';
 import 'package:mlao/utility/my_style.dart';
@@ -15,12 +18,23 @@ class MainUser extends StatefulWidget {
 class _MainUserState extends State<MainUser> {
   String nameUser;
   Widget currentWidget;
+  int amount = 0;
 
   @override
   void initState() {
     super.initState();
     currentWidget = Bodys();
     findUser();
+    checkAmunt();
+  }
+
+  Future<Null> checkAmunt() async {
+    await SQLiteHelper().readAllDataFromSQLite().then((value) {
+      int i = value.length;
+      setState(() {
+        amount = i;
+      });    
+    });
   }
 
   Future<Null> findUser() async {
@@ -36,7 +50,10 @@ class _MainUserState extends State<MainUser> {
       appBar: AppBar(
         title: Text(nameUser == null ? 'Main User' : 'login  $nameUser'),
         actions: <Widget>[
-          MyStyle().iconShowCart(context),
+          MyStyle().iconShowCart(
+            context,
+            amount,
+          ),
         ],
       ),
       drawer: showDrawer(),

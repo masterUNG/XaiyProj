@@ -6,6 +6,7 @@ import 'package:mlao/shop/about_shop.dart';
 import 'package:mlao/user/groupmenu002.dart';
 import 'package:mlao/user/show_menu_food03.dart';
 import 'package:mlao/utility/my_style.dart';
+import 'package:mlao/utility/sqlite_helper.dart';
 
 class ShowShopFoodMenu extends StatefulWidget {
   final UserModel userModel;
@@ -21,10 +22,17 @@ class _ShowShopFoodMenuState extends State<ShowShopFoodMenu> {
   List<Widget> listWidgets = List();
   int indexPage = 0;
 
+  int amount = 0;
+
   @override
   void initState() {
     super.initState();
     userModel = widget.userModel;
+
+    checkAmunt();
+
+    print('#### recive at show_shop_food_menu02 ==> ${userModel.nameShop}');
+
     listWidgets.add(HomeMenu(
       userModel: userModel,
     ));
@@ -73,11 +81,24 @@ class _ShowShopFoodMenuState extends State<ShowShopFoodMenu> {
     );
   }
 
+  Future<Null> checkAmunt() async {
+    await SQLiteHelper().readAllDataFromSQLite().then((value) {
+      int i = value.length;
+      setState(() {
+        amount = i;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[MyStyle().iconShowCart(context)],
+        actions: <Widget>[
+          MyStyle().iconShowCart(
+            context, amount
+          )
+        ],
         title: Text(userModel.nameShop),
       ),
       body:
