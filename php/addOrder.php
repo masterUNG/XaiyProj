@@ -35,7 +35,7 @@ if (isset($_GET)) {
 		$Status = $_GET['Status'];
 
 							
-		$sql = "INSERT INTO `ordertable`(`id`, `OrderDateTime`, `idUser`, `NameUser`, `idShop`, `NameShop`, `Distance`, `Transport`, `idFood`, `NameFood`, `Price`, `Amount`, `Sum`, `idRider`, `Status`) VALUES (Null,'$OrderDateTime','$idUser','$NameUser','$idShop','$NameShop','$Distance','$Transport','$idFood','$NameFood','$Price','$Amount','$Sum','$idRider','$Status')";
+		$sql = "INSERT INTO `ordertable`(`id`, `OrderDateTime`, `idUser`, `NameUser`, `idShop`, `NameShop`, `Distance`, `Transport`, `idFood`, `NameFood`, `Price`, `Amount`, `Sum`, `idRider`, `Status`, `idGrp`, `NameGroup`) VALUES (Null,'$OrderDateTime','$idUser','$NameUser','$idShop','$NameShop','$Distance','$Transport','$idFood','$NameFood','$Price','$Amount','$Sum','$idRider','$Status','','')";
 
 		$result = mysqli_query($link, $sql);
 
