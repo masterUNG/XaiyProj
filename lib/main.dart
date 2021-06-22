@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mlao/providers/amount_cart_provider.dart';
 import 'package:mlao/screens/home.dart';
+import 'package:mlao/screens/wait_shop_check_order.dart';
 import 'package:provider/provider.dart';
 // import 'package:mlao/screens/home.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             visualDensity: VisualDensity.adaptivePlatformDensity),
         home: Home(),
+        // home: WaitShopCheckOrder(),
         debugShowCheckedModeBanner: false,
       ),
     );

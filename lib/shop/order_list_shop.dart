@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mlao/screens/show_pdf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mlao/model/order_model.dart';
 import 'package:mlao/utility/my_api.dart';
@@ -156,7 +157,13 @@ class _OrderListShopState extends State<OrderListShop> {
                               // color: Colors.green,
                               // shape: RoundedRectangleBorder(
                               //     borderRadius: BorderRadius.circular(30)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ShowPDF(),
+                                    ));
+                              },
                               icon: Icon(
                                 Icons.restaurant,
                                 color: Colors.white,

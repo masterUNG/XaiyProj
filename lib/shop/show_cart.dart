@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mlao/screens/wait_shop_check_order.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:toast/toast.dart';
 import 'package:mlao/model/cart_model.dart';
@@ -349,10 +350,17 @@ class _ShowCartState extends State<ShowCart> {
     String url =
         '${MyConstant().domain}/mlao/addOrder.php?isAdd=true&OrderDateTime=$orderDateTime&idUser=$idUser&NameUser=$nameUser&idShop=$idShop&NameShop=$nameShop&Distance=$distance&Transport=$transport&idFood=$idFood&NameFood=$nameFood&Price=$price&Amount=$amount&Sum=$sum&idRider=none&Status=UserOrder';
 
+    print('###### urlAddOrder ===>>> $url');
+
     await Dio().get(url).then((value) {
       if (value.toString() == 'true') {
         clearAllSQLite();
         notificationToShop(idShop);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WaitShopCheckOrder(),
+            ));
       } else {
         normalDialog(context, 'ບໍ່ສາມາດ Order ໄດ້ ກະລຸນາລອງໄໝ່');
       }
